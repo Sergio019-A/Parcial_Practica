@@ -40,9 +40,9 @@ public class ControlFormCard {
 	@FXML
 	private ComboBox<Propietario> cmbTitular;
 	@FXML
-	private RadioButton radio1; // Débito
+	private RadioButton radio1; // Casa
 	@FXML
-	private RadioButton radio2; // Crédito
+	private RadioButton radio2; // apartamento
 	@FXML
 	private ToggleGroup tipo;
 
@@ -88,12 +88,12 @@ public class ControlFormCard {
 				if (t != null)
 					txtAreaResultado.setText(t.toString());
 				else
-					mostrarAlerta("No existe el numero de tarjeta");
+					mostrarAlerta("No existe el numero de inmueble");
 			} catch (Exception e) {
 				mostrarAlerta(e.getMessage());
 			}
 		} else
-			mostrarAlerta("Ingrese número de tarjeta");
+			mostrarAlerta("Ingrese número de inmueble");
 	}
 
 	@FXML
@@ -101,7 +101,7 @@ public class ControlFormCard {
 
 		String numero = txtTarjeta2.getText().trim();
 		if (numero.isEmpty()) {
-			mostrarAlerta("⚠ Ingrese el número de tarjeta.");
+			mostrarAlerta("⚠ Ingrese el número de inmueble.");
 			return;
 		}
 
@@ -114,7 +114,7 @@ public class ControlFormCard {
 
 		Propietario titular = cmbTitular.getValue();
 		if (titular == null) {
-			mostrarAlerta("⚠ Seleccione un titular.");
+			mostrarAlerta("⚠ Seleccione un Propietario.");
 			return;
 		}
 

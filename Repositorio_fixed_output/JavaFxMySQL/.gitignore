@@ -1,2 +1,19 @@
-/examen2_Soto/
+# Ignorar carpetas de compilación
+/target/
+bin/
+
+# Ignorar archivos de configuración de VS Code y Eclipse
+.settings/
+.classpath
+.project
+.factorypath
+
+# Ignorar archivos de sistema y entorno
 .env
+.DS_Store
+Thumbs.db
+
+# Ignorar binarios de Java
+*.class
+*.jar
+*.war

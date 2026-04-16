@@ -15,21 +15,22 @@ public class TestDAOInmueble {
     DAOInmueble dao = new DAOInmueble();
 
     @Test
-    void create_debito_y_readone() throws Exception {
+    void create_apartamento_y_readone() throws Exception {
+        // NOTA: Asegúrate de que 'P001' existe en tu tabla propietario de MySQL
+        Propietario titular = new Propietario("P001", "Carlos Acero");
 
-        Propietario titular = new Propietario("T001", "Test");
-
-        Apartamento debito = new Apartamento(
+        Apartamento apto = new Apartamento(
                 "999001",
-                "2025-12-25",
+                "25/12/2025", // Formato DD/MM/YYYY para que tu nuevo DAO lo procese
                 true,
                 titular,
-                5000.0
+                5.0 // Esto se guarda en tu variable 'saldo' (que mapeamos a num_piso)
         );
 
-        String result = dao.create(debito);
+        String result = dao.create(apto);
 
-        assertTrue(result.contains("guardada"));
+        // Cambié "guardada" por "guardado" para que coincida con el mensaje del DAO
+        assertTrue(result.contains("guardado"));
 
         Inmueble t = dao.readone("999001");
 
@@ -37,25 +38,24 @@ public class TestDAOInmueble {
         assertTrue(t instanceof Apartamento);
 
         Apartamento d = (Apartamento) t;
-        assertEquals(5000.0, d.getSaldo());
+        assertEquals(5.0, d.getSaldo());
     }
 
     @Test
-    void create_credito_y_readone() throws Exception {
+    void create_casa_y_readone() throws Exception {
+        Propietario titular = new Propietario("P001", "Carlos Acero");
 
-        Propietario titular = new Propietario("T001", "Test");
-
-        Casa credito = new Casa(
+        Casa casa = new Casa(
                 "999002",
-                "2025-12-25",
+                "25/12/2025",
                 true,
                 titular,
-                10000.0
+                3.0 // Esto se guarda en 'limite' (que mapeamos a cant_pisos)
         );
 
-        String result = dao.create(credito);
+        String result = dao.create(casa);
 
-        assertTrue(result.contains("guardada"));
+        assertTrue(result.contains("guardado"));
 
         Inmueble t = dao.readone("999002");
 
@@ -63,12 +63,12 @@ public class TestDAOInmueble {
         assertTrue(t instanceof Casa);
 
         Casa c = (Casa) t;
-        assertEquals(10000.0, c.getLimite());
+        assertEquals(3.0, c.getLimite());
     }
 
     @Test
     void readone_noExiste() throws Exception {
-
+        // Un número que sepamos que no está en la DB
         Inmueble t = dao.readone("000000");
 
         assertNull(t);
